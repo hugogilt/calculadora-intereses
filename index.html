@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Intereses</title>
+    <script>
+        function calcular() {
+            // Obtener valores del formulario
+            const capitalInicial = parseFloat(document.getElementById("capital").value);
+            const interesTradeRepublicAnual = parseFloat(document.getElementById("interesTrade").value) / 100;
+            const interesRevolutAnual = parseFloat(document.getElementById("interesRevolut").value) / 100;
+            const impuestos = document.getElementById("impuestos").value === "Si";
+            const impuesto = 0.19;
+
+            // Interés mensual y diario
+            const interesTradeRepublicMensual = interesTradeRepublicAnual / 12;
+            const interesRevolutDiario = interesRevolutAnual / 365;
+
+            // Cálculo para Trade Republic (interés compuesto mensual)
+            let capitalTradeRepublicFinal = capitalInicial * Math.pow((1 + interesTradeRepublicMensual), 12);
+            let beneficioTradeRepublicSinImpuestos = capitalTradeRepublicFinal - capitalInicial;
+            let beneficioTradeRepublicConImpuestos = beneficioTradeRepublicSinImpuestos * (1 - impuesto);
+
+            // Cálculo para Revolut (interés compuesto diario)
+            let capitalRevolutFinal = capitalInicial;
+            for (let i = 0; i < 365; i++) {
+                let interesDiario = capitalRevolutFinal * interesRevolutDiario;
+                if (impuestos) {
+                    interesDiario *= (1 - impuesto);
+                }
+                capitalRevolutFinal += interesDiario;
+            }
+            let beneficioRevolutConImpuestos = capitalRevolutFinal - capitalInicial;
+
+            // Diferencia de beneficios
+            let diferenciaTradeRevolut;
+
+            if (impuestos) {
+                diferenciaTradeRevolut = beneficioTradeRepublicConImpuestos - beneficioRevolutConImpuestos;
+            } else {
+                diferenciaTradeRevolut = beneficioTradeRepublicSinImpuestos - (capitalRevolutFinal - capitalInicial);
+            }
+
+            // Mostrar el resultado según si es positivo o negativo
+            let mensajeDiferencia;
+            if (diferenciaTradeRevolut > 0) {
+                mensajeDiferencia = `Con Trade Republic ganas ${diferenciaTradeRevolut.toFixed(2)}€ más.`;
+            } else {
+                mensajeDiferencia = `Con Revolut ganas ${Math.abs(diferenciaTradeRevolut).toFixed(2)}€ más.`;
+            }
+
+            // Decidir qué mostrar según si hay impuestos o no
+            if (impuestos) {
+                document.getElementById("resultado").innerHTML = `
+                    <p><strong>Con Impuestos:</strong></p>
+                    <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
+                    <p>Beneficio neto Trade Republic: ${beneficioTradeRepublicConImpuestos.toFixed(2)}€</p>
+                    <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
+                    <p>Beneficio neto Revolut: ${beneficioRevolutConImpuestos.toFixed(2)}€</p>
+                    <p>${mensajeDiferencia}</p>
+                `;
+            } else {
+                document.getElementById("resultado").innerHTML = `
+                    <p><strong>Sin Impuestos:</strong></p>
+                    <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
+                    <p>Beneficio neto Trade Republic: ${beneficioTradeRepublicSinImpuestos.toFixed(2)}€</p>
+                    <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
+                    <p>Beneficio neto Revolut: ${(capitalRevolutFinal - capitalInicial).toFixed(2)}€</p>
+                    <p>${mensajeDiferencia}</p>
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculadora de Intereses</h1>
+    <form id="formulario" onsubmit="event.preventDefault(); calcular();">
+        <label for="capital">Capital Inicial (€):</label>
+        <input type="number" id="capital" required><br><br>
+
+        <label for="interesTrade">Interés Anual Trade Republic (%):</label>
+        <input type="number" id="interesTrade" step="0.01" required><br><br>
+
+        <label for="interesRevolut">Interés Anual Revolut (%):</label>
+        <input type="number" id="interesRevolut" step="0.01" required><br><br>
+
+        <label for="impuestos">Impuestos:</label>
+        <select id="impuestos" required>
+            <option value="Si">Sí</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div id="resultado"></div>
+</body>
+</html>
