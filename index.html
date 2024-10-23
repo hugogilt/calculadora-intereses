@@ -74,17 +74,17 @@
     </script>
 </head>
 <body style=" margin: 0; height: 100vh; background-image: url(money.gif); background-size: 100% 100vh; background-position: center center; background-repeat: no-repeat;">
-    <div  style="background-color: rgba(150, 150, 150, 0.5); width: auto; display: inline-block; border-radius: 10px;">
+    <div  style="background-color: rgba(200, 200, 200, 0.7); width: auto; display: inline-block; border-radius: 10px;">
     <h1 style="margin: 0;">Calculadora de Intereses Anual</h1>
     <form id="formulario" onsubmit="event.preventDefault(); calcular();">
         <label for="capital">Capital Inicial (€):</label>
-        <input type="number" id="capital" required><br><br>
+        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" id="capital" required><br><br>
 
         <label for="interesTrade">Interés Anual Trade Republic (%):</label>
-        <input type="number" id="interesTrade" step="0.01" required><br><br>
+        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" id="interesTrade" step="0.01" required><br><br>
 
         <label for="interesRevolut">Interés Anual Revolut (%):</label>
-        <input type="number" id="interesRevolut" step="0.01" required><br><br>
+        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" id="interesRevolut" step="0.01" required><br><br>
 
         <label for="impuestos">Impuestos:</label>
         <select id="impuestos" required>
