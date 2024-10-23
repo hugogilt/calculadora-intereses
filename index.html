@@ -45,9 +45,9 @@
             // Mostrar el resultado según si es positivo o negativo
             let mensajeDiferencia;
             if (diferenciaTradeRevolut > 0) {
-                mensajeDiferencia = `Con Trade Republic ganas ${diferenciaTradeRevolut.toFixed(2)}€ más.`;
+                mensajeDiferencia = `Con <b>Trade Republic</b> ganas ${diferenciaTradeRevolut.toFixed(2)}€ más.`;
             } else {
-                mensajeDiferencia = `Con Revolut ganas ${Math.abs(diferenciaTradeRevolut).toFixed(2)}€ más.`;
+                mensajeDiferencia = `Con <b>Revolut</b>  ganas${Math.abs(diferenciaTradeRevolut).toFixed(2)}€ más.`;
             }
 
             // Decidir qué mostrar según si hay impuestos o no
@@ -75,7 +75,7 @@
 </head>
 <body style=" margin: 0; height: 100vh; background-image: url(money.gif); background-size: 100% 100vh; background-position: center center; background-repeat: no-repeat;">
     <div  style="background-color: rgba(150, 150, 150, 0.5); width: auto; display: inline-block; border-radius: 10px;">
-    <h1 style="margin: 0;">Calculadora de Intereses</h1>
+    <h1 style="margin: 0;">Calculadora de Intereses Anual</h1>
     <form id="formulario" onsubmit="event.preventDefault(); calcular();">
         <label for="capital">Capital Inicial (€):</label>
         <input type="number" id="capital" required><br><br>
