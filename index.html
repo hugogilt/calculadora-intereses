@@ -86,11 +86,15 @@
         <label for="interesRevolut">Interés Anual Revolut (%):</label>
         <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" id="interesRevolut" step="0.01" required><br><br>
 
-        <label for="impuestos">Impuestos (En revolut se aplican en cada pago, en trade republic al final):</label>
+        <label style="max-width: 20%;" for="impuestos">Impuestos: </label>
         <select id="impuestos" required>
             <option value="Si">Sí</option>
             <option value="No">No</option>
-        </select><br><br>
+        </select> <br>
+        <span> (En revolut se aplican en cada pago, <br>en trade republic al final)</span>
+        
+        <br><br>
+        
 
         <button type="submit">Calcular</button>
     </form>
