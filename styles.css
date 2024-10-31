@@ -14,7 +14,7 @@ body {
 main {
     background-color: rgba(200, 200, 200, 0.7);
     width: 50%;
-    min-width: 400px;  /*OCUPA LA MITAD HASTA QUE LA PANTALLA MIDE MENOS DE 800PX, AHI SE QUEDA EN 400 */
+    min-width: 500px;  /*OCUPA LA MITAD HASTA QUE LA PANTALLA MIDE MENOS DE 1000PX, AHI SE QUEDA EN 500 */
     display: block;
     border-radius: 10px;
     margin: 0 auto;
@@ -56,6 +56,7 @@ input {
 #calcularButton {
     background-color: rgb(74, 111, 223);
     color: white;
+    border-radius: 16px;
 }
 
 #comment {
@@ -63,7 +64,7 @@ input {
     display: inline-block;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     main {
         width: 100%;
         min-width: initial;
