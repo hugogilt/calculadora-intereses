@@ -1,0 +1,71 @@
+html {
+    height: 100vh;
+    background-image: url(money.gif);
+    background-size: 100% 100vh;
+    background-position: center center;
+    background-repeat: no-repeat
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+main {
+    background-color: rgba(200, 200, 200, 0.7);
+    width: 50%;
+    min-width: 400px;  /*OCUPA LA MITAD HASTA QUE LA PANTALLA MIDE MENOS DE 800PX, AHI SE QUEDA EN 400 */
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0.5em 0 0;
+}
+
+hr {
+    margin: 1em 0;
+    background-color: black;
+    height: 2px;
+}
+
+#formuldario img:first-of-type {
+    width: 30px;
+}
+
+img{
+    width: 20px;
+    position: absolute;
+}
+
+input {
+    background-color: rgba(255, 255, 255, 0.4);
+    display: block;
+    margin-bottom: 1em;
+}
+
+#impuestos {
+    max-width: 20%;
+    color: rgb(74, 111, 223);;
+}
+
+#calcularButton {
+    background-color: rgb(74, 111, 223);
+    color: white;
+}
+
+#comment {
+    max-width: 30ch;
+    display: inline-block;
+}
+
+@media (max-width: 400px) {
+    main {
+        width: 100%;
+        min-width: initial;
+    }
+}

@@ -1,105 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cálculo de Intereses</title>
-    <script>
-        function calcular() {
-            // Obtener valores del formulario
-            const capitalInicial = parseFloat(document.getElementById("capital").value);
-            const interesTradeRepublicAnual = parseFloat(document.getElementById("interesTrade").value) / 100;
-            const interesRevolutAnual = parseFloat(document.getElementById("interesRevolut").value) / 100;
-            const impuestos = document.getElementById("impuestos").value === "Si";
-            const impuesto = 0.19;
-
-            // Interés mensual y diario
-            const interesTradeRepublicMensual = interesTradeRepublicAnual / 12;
-            const interesRevolutDiario = interesRevolutAnual / 365;
-
-            // Cálculo para Trade Republic (interés compuesto mensual)
-            let capitalTradeRepublicFinal = capitalInicial * Math.pow((1 + interesTradeRepublicMensual), 12);
-            let beneficioTradeRepublicSinImpuestos = capitalTradeRepublicFinal - capitalInicial;
-            let beneficioTradeRepublicConImpuestos = beneficioTradeRepublicSinImpuestos * (1 - impuesto);
-
-            // Cálculo para Revolut (interés compuesto diario)
-            let capitalRevolutFinal = capitalInicial;
-            for (let i = 0; i < 365; i++) {
-                let interesDiario = capitalRevolutFinal * interesRevolutDiario;
-                if (impuestos) {
-                    interesDiario *= (1 - impuesto);
-                }
-                capitalRevolutFinal += interesDiario;
-            }
-            let beneficioRevolutConImpuestos = capitalRevolutFinal - capitalInicial;
-
-            // Diferencia de beneficios
-            let diferenciaTradeRevolut;
-
-            if (impuestos) {
-                diferenciaTradeRevolut = beneficioTradeRepublicConImpuestos - beneficioRevolutConImpuestos;
-            } else {
-                diferenciaTradeRevolut = beneficioTradeRepublicSinImpuestos - (capitalRevolutFinal - capitalInicial);
-            }
-
-            // Mostrar el resultado según si es positivo o negativo
-            let mensajeDiferencia;
-            if (diferenciaTradeRevolut > 0) {
-                mensajeDiferencia = `Con <b>Trade Republic</b> ganas ${diferenciaTradeRevolut.toFixed(2)}€ más.`;
-            } else {
-                mensajeDiferencia = `Con <b>Revolut</b> ganas ${Math.abs(diferenciaTradeRevolut).toFixed(2)}€ más.`;
-            }
-
-            // Decidir qué mostrar según si hay impuestos o no
-            if (impuestos) {
-                document.getElementById("resultado").innerHTML = `
-                    <p><strong>Con Impuestos:</strong></p>
-                    <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
-                    <p>Beneficio neto Trade Republic: ${beneficioTradeRepublicConImpuestos.toFixed(2)}€</p>
-                    <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
-                    <p>Beneficio neto Revolut: ${beneficioRevolutConImpuestos.toFixed(2)}€</p>
-                    <p>${mensajeDiferencia}</p>
-                `;
-            } else {
-                document.getElementById("resultado").innerHTML = `
-                    <p><strong>Sin Impuestos:</strong></p>
-                    <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
-                    <p>Beneficio neto Trade Republic: ${beneficioTradeRepublicSinImpuestos.toFixed(2)}€</p>
-                    <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
-                    <p>Beneficio neto Revolut: ${(capitalRevolutFinal - capitalInicial).toFixed(2)}€</p>
-                    <p>${mensajeDiferencia}</p>
-                `;
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body style=" margin: 0; height: 100vh; background-image: url(money.gif); background-size: 100% 100vh; background-position: center center; background-repeat: no-repeat;">
-    <div  style="background-color: rgba(200, 200, 200, 0.7); width: auto; display: inline-block; border-radius: 10px;">
-    <h1 style="margin: 0;">Calculadora de Intereses Anual</h1>
-    <form id="formulario" onsubmit="event.preventDefault(); calcular();">
-        <label for="capital">Capital Inicial (€):</label>
-        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" id="capital" required><br><br>
 
-        <label for="interesTrade">Interés Anual Trade Republic (%):</label>
-        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" value="3.25" id="interesTrade" step="0.01" required><br><br>
+<body>
+    <main>
+        <header>
+            <h1>Calculadora de Intereses Anual</h1> <hr>
+        </header>
+        <form id="formulario" onsubmit="event.preventDefault(); calcular();">
+            <label for="capital">Capital Inicial (€):</label>
+            <input type="number" id="capital" required>
 
-        <label for="interesRevolut">Interés Anual Revolut (%):</label>
-        <input style="background-color: rgba(255, 255, 255, 0.4);" type="number" value="3.50" id="interesRevolut" step="0.01" required><br><br>
+            <label for="interesTrade">Interés Anual Trade Republic (%):</label><img src="img/tr.png" alt="">
+            <input type="number" value="3.25" id="interesTrade" step="0.01" required>
 
-        <label style="max-width: 20%;" for="impuestos">Impuestos: </label>
-        <select id="impuestos" required>
-            <option value="Si">Sí</option>
-            <option value="No">No</option>
-        </select> <br>
-        <span> (En revolut se aplican en cada pago, <br>en trade republic al final)</span>
-        
-        <br><br>
-        
+            <label for="interesRevolut">Interés Anual Revolut (%):</label><img src="img/revolut.png" alt="">
+            <input type="number" value="3.50" id="interesRevolut" step="0.01" required>
 
-        <button type="submit">Calcular</button>
-    </form>
+            <label for="impuestos">Impuestos: </label>
+            <select id="impuestos" required>
+                <option value="Si">Sí</option>
+                <option value="No">No</option>
+            </select> <br>
+            <span id="comment"> (En revolut se aplican en cada pago, en trade republic al final)</span>
 
-    <div id="resultado"></div>
-</div>
+            <br><br>
+
+
+            <button id="calcularButton" type="submit">Calcular</button>
+        </form>
+
+        <div id="resultado"></div>
+    </main>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
