@@ -10,7 +10,7 @@ function calcular() {
     const interesTradeRepublicMensual = interesTradeRepublicAnual / 12;
     const interesRevolutDiario = interesRevolutAnual / 365;
 
-    // Cálculo para Trade Republic (interés compuesto mensual)
+    // Cálculo para Trade Republic (interés compuesto mensual) TOFIX: TENER EN CUENTA QUE EN TRADE EL MAXIMO CAPITAL ES 50.000 Y EN REVOLUT 100.000
     let capitalTradeRepublicFinal = capitalInicial * Math.pow((1 + interesTradeRepublicMensual), 12);
     let beneficioTradeRepublicSinImpuestos = capitalTradeRepublicFinal - capitalInicial;
     let beneficioTradeRepublicConImpuestos = beneficioTradeRepublicSinImpuestos * (1 - impuesto);
