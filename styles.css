@@ -14,7 +14,8 @@ body {
 main {
     background-color: rgba(200, 200, 200, 0.7);
     width: 50%;
-    min-width: 500px;  /*OCUPA LA MITAD HASTA QUE LA PANTALLA MIDE MENOS DE 1000PX, AHI SE QUEDA EN 500 */
+    min-width: 500px;
+    /*OCUPA LA MITAD HASTA QUE LA PANTALLA MIDE MENOS DE 1000PX, AHI SE QUEDA EN 500 */
     display: block;
     border-radius: 10px;
     margin: 0 auto;
@@ -37,8 +38,13 @@ hr {
     width: 30px;
 }
 
-img{
+form img {
     width: 20px;
+    position: absolute;
+}
+
+span img {
+    width: 17px;
     position: absolute;
 }
 
@@ -50,7 +56,8 @@ input {
 
 #impuestos {
     max-width: 20%;
-    color: rgb(74, 111, 223);;
+    color: rgb(74, 111, 223);
+    ;
 }
 
 #calcularButton {
@@ -62,6 +69,13 @@ input {
 #comment {
     max-width: 30ch;
     display: inline-block;
+}
+
+.alerta {
+    display: block;
+    font-style: italic;
+    font-size: 0.8em;
+    text-decoration: underline;
 }
 
 @media (max-width: 500px) {
