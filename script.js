@@ -56,31 +56,33 @@ function calcular() {
     // Mostrar el resultado según si es positivo o negativo
     let mensajeDiferencia;
     if (diferenciaTradeRevolut > 0) {
-        mensajeDiferencia = `Con <b>Trade Republic</b> ganas ${diferenciaTradeRevolut.toFixed(2)}€ más.`;
+        mensajeDiferencia = `Con <b>Trade Republic</b> ganas ${formatearNumero(Math.abs(diferenciaTradeRevolut))}€ más.`;
     } else {
-        mensajeDiferencia = `Con <b>Revolut</b> ganas ${Math.abs(diferenciaTradeRevolut).toFixed(2)}€ más.`;
+        mensajeDiferencia = `Con <b>Revolut</b> ganas ${formatearNumero(Math.abs(diferenciaTradeRevolut))}€ más.`;
     }
+
+
 
     // Decidir qué mostrar según si hay impuestos o no
     if (impuestos) {
         document.getElementById("resultado").innerHTML = `
             <p><strong>Con Impuestos:</strong></p>
-            <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
-            <p>Beneficio neto anual con Trade Republic: ${beneficioTradeRepublicConImpuestos.toFixed(2)}€
+            <p>Capital final Trade Republic: ${formatearNumero(capitalTradeRepublicFinal)}€</p>
+            <p>Beneficio neto anual con Trade Republic: ${formatearNumero(beneficioTradeRepublicConImpuestos)}€
             <span class = alerta>${alertaTradeRepublic}<img id="alertaTradeRepublicImg" src="./img/warning.png"></span></p>
-            <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
-            <p>Beneficio neto anual con Revolut: ${beneficioRevolutConImpuestos.toFixed(2)}€
+            <p>Capital final Revolut: ${formatearNumero(capitalRevolutFinal)}€</p>
+            <p>Beneficio neto anual con Revolut: ${formatearNumero(beneficioRevolutConImpuestos)}€
             <span class = alerta>${alertaRevolut}<img id="alertaRevolutImg" src="./img/warning.png"></span></p>
             <p>${mensajeDiferencia}</p>
         `;
     } else {
         document.getElementById("resultado").innerHTML = `
             <p><strong>Sin Impuestos:</strong></p>
-            <p>Capital final Trade Republic: ${capitalTradeRepublicFinal.toFixed(2)}€</p>
-            <p>Beneficio neto Trade Republic: ${beneficioTradeRepublicSinImpuestos.toFixed(2)}€
+            <p>Capital final Trade Republic: ${formatearNumero(capitalTradeRepublicFinal)}€</p>
+            <p>Beneficio neto Trade Republic: ${formatearNumero(beneficioTradeRepublicSinImpuestos)}€
             <span class = alerta>${alertaTradeRepublic}<img id="alertaTradeRepublicImg" src="./img/warning.png"></span></p>
-            <p>Capital final Revolut: ${capitalRevolutFinal.toFixed(2)}€</p>
-            <p>Beneficio neto Revolut: ${(capitalRevolutFinal - capitalInicialRevolut).toFixed(2)}€
+            <p>Capital final Revolut: ${formatearNumero(capitalRevolutFinal)}€</p>
+            <p>Beneficio neto Revolut: ${(formatearNumero(capitalRevolutFinal - capitalInicialRevolut))}€
             <span class = alerta>${alertaRevolut}<img id="alertaRevolutImg" src="./img/warning.png"></span></p>
             <p>${mensajeDiferencia}</p>
         `;
@@ -95,4 +97,21 @@ function calcular() {
     }
     ocultarImagenSiAlertaVacia(alertaTradeRepublic, 'alertaTradeRepublicImg');
     ocultarImagenSiAlertaVacia(alertaRevolut, 'alertaRevolutImg');
+
+
+    function formatearNumero(numero) {
+        // Asegúrate de que el número tenga un valor fijo de decimales
+        const numFijo = numero.toFixed(2); // Redondear a 2 decimales
+        
+        // Separar la parte entera de la parte decimal
+        let [entero, decimal] = numFijo.split('.'); // Split en el punto
+        
+        // Formatear la parte entera agregando puntos cada 3 dígitos
+        entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        
+        // Combinar la parte entera con la parte decimal, reemplazando el punto por una coma
+        return `${entero},<span class="decimal">${decimal}</span>`;
+    }
+    
+    
 }

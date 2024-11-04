@@ -78,6 +78,10 @@ input {
     text-decoration: underline;
 }
 
+.decimal {
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+}
+
 @media (max-width: 500px) {
     main {
         width: 100%;
