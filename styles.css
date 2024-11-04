@@ -19,6 +19,7 @@ main {
     display: block;
     border-radius: 10px;
     margin: 0 auto;
+    padding-bottom: 1em;
 }
 
 h1 {
@@ -34,8 +35,8 @@ hr {
     height: 2px;
 }
 
-#formuldario img:first-of-type {
-    width: 30px;
+form {
+    padding: 0 1em;
 }
 
 form img {
@@ -57,7 +58,6 @@ input {
 #impuestos {
     max-width: 20%;
     color: rgb(74, 111, 223);
-    ;
 }
 
 #calcularButton {
@@ -69,6 +69,10 @@ input {
 #comment {
     max-width: 30ch;
     display: inline-block;
+}
+
+#resultado {
+    padding: 0 1em;
 }
 
 .alerta {
@@ -87,4 +91,6 @@ input {
         width: 100%;
         min-width: initial;
     }
+    
+    
 }
